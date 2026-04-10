@@ -3,8 +3,13 @@ from rich.table import Table
 from scraper import search_products
 
 
+
 def create_table():
-    products = search_products('teclado mecanico rgb')
+    query = input("Informe o produto: ")
+    console = Console()
+
+    with console.status("Buscando produtos..."):
+        products = search_products(query)
 
     table = Table(title="Resultados")
     table.add_column("Produto",  style="cyan")
@@ -20,7 +25,6 @@ def create_table():
             f"[link={product['link'].replace(' ', '%20')}]Ver produto[/link]"
         )
 
-    console = Console()
     console.print(table)
 
 create_table()
